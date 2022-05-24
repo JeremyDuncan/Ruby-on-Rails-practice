@@ -35,12 +35,14 @@
 - `rails db:migrate`
 
 ## Use these lines in Rails_App/db/migrate/migration_action_name_here.rb
-- `add_column :table_name, :column_name, :datatype`
-- `change_column :table_name, :column_name, :datatype`
-- `rename_column :table, :old_column, :new_column`
-- `remove_column :table_name, :column_name`
-
+*db/migrate/migrate_action.db
+```ruby
+- add_column :table_name, :column_name, :datatype
+- change_column :table_name, :column_name, :datatype
+- rename_column :table, :old_column, :new_column
+- remove_column :table_name, :column_name
 ```
+```ruby
 class AddNewColumnMovieLength < ActiveRecord::Migration[7.0]
   def change
     add_column :movies, :movie_length, :string
@@ -48,10 +50,35 @@ class AddNewColumnMovieLength < ActiveRecord::Migration[7.0]
 end
 ```
 
+# =========== Relationships =====================
+## Types of Relationships
+Rails supports six types of associations:
+- belongs_to
+- has_one
+- has_many
+- has_many :through
+- has_one :through
+- has_and_belongs_to_many
+
+*app/models/person.rb*
+```ruby
+class Person < ApplicationRecord
+  has_many :emails
+end
+```
+Note: emails is plural
+
+*app/models/email.rb*
+```ruby
+class Email < ApplicationRecord
+  belongs_to :person
+end
+```
+Note: person is singular
 # ======== rspec & validation =========
 
 
-```
+```ruby
 class Learnbook < ApplicationRecord
   validates :username, :email, presence: turned
   validates :username, length: { minimum: 3 }
