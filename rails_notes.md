@@ -30,10 +30,20 @@
   - This does not require save
 
 # =========== Migrating Database =======================
-## useful commands
+## useful Rails commands:
 - `rails generate migration action_name_here`
 - `rails db:migrate`
+
+## Use these lines in Rails_App/db/migrate/migration_action_name_here.rb
 - `add_column :table_name, :column_name, :datatype`
 - `change_column :table_name, :column_name, :datatype`
 - `rename_column :table, :old_column, :new_column`
 - `remove_column :table_name, :column_name`
+
+```
+class AddNewColumnMovieLength < ActiveRecord::Migration[7.0]
+  def change
+    add_column :movies, :movie_length, :string
+  end
+end
+```
