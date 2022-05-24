@@ -92,8 +92,22 @@ RSpec.describe Address, type: :model do
 
     expect(test_address3.errors[:zip]).to_not be_empty
   end
-end
 
-# - HINT: Read about [ numericality ](https://edgeguides.rubyonrails.org/active_record_validations.html#numericality) in the Active Record validation docs.
-# - As a developer, I want to see a custom error message that says "Please, input numbers only" if street_number or zip code are not numbers.
-# - HINT: Read about [ message ](https://edgeguides.rubyonrails.org/active_record_validations.html#message) in the  validation docs.
+  it 'Displays error message: "Please, input numbers only", if street number is not a number' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 'five', city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+
+    expect(test_address3.errors[:street_number]).to eq ['Please, input numbers only']
+  end
+
+  it 'Displays error message: "Please, input numbers only", if zip is not a number' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 134, city: 'Atlanta',
+                                              state: 'GA', zip: 'three o one', account_id: 1
+
+    expect(test_address3.errors[:zip]).to eq ['Please, input numbers only']
+  end
+end

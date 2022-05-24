@@ -6,6 +6,6 @@ class Address < ApplicationRecord
   validates :street_number, uniqueness: true
   validates :zip, uniqueness: true
 
-  validates :street_number, numericality: { only_integer: true }
-  validates :zip, numericality: { only_integer: true }
+  validates :street_number, numericality: { message: 'Please, input numbers only', only_integer: true }
+  validates :zip, numericality: { message: 'Please, input numbers only', only_integer: true }
 end
