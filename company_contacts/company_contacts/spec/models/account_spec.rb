@@ -20,4 +20,10 @@ RSpec.describe Account, type: :model do
     test = Account.create username: 'jdun'
     expect(test.errors[:username]).to_not be_empty
   end
+
+  it 'username must be unique' do
+    test = Account.create password: 'password123', email: 'jeremy.duncan1984@gmail.com'
+    test2 = Account.create password: 'password123', email: 'jeremy.duncan1984@gmail.com'
+    expect(test2.errors[:username]).to_not be_empty
+  end
 end
