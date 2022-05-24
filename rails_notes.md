@@ -37,6 +37,3 @@
 - `change_column :table_name, :column_name, :datatype`
 - `rename_column :table, :old_column, :new_column`
 - `remove_column :table_name, :column_name`
-- Create a migration to add a new column to the database called movie_length
-- Update the values of the five existing attributes to include a movie_length value
-- Generate a migration to rename the column 'category' to 'genre'
