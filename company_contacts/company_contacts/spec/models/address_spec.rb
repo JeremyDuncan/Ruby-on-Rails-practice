@@ -74,11 +74,26 @@ RSpec.describe Address, type: :model do
 
     expect(test_address3.errors[:zip]).to_not be_empty
   end
+
+  it 'Street number is a number' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 'five', city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+
+    expect(test_address3.errors[:street_number]).to_not be_empty
+  end
+
+  it 'zip is a number' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 134, city: 'Atlanta',
+                                              state: 'GA', zip: 'three o one', account_id: 1
+
+    expect(test_address3.errors[:zip]).to_not be_empty
+  end
 end
 
-# - As a developer, I want to validate that Address street_number, street_name, zip are unique for within an account.
-# - HINT: Read about [ :scope ](https://guides.rubyonrails.org/active_record_validations.html#uniqueness) in the Active Record validation docs.
-# - As a developer, I want to validate that the Address street_number and zip are numbers.
 # - HINT: Read about [ numericality ](https://edgeguides.rubyonrails.org/active_record_validations.html#numericality) in the Active Record validation docs.
 # - As a developer, I want to see a custom error message that says "Please, input numbers only" if street_number or zip code are not numbers.
 # - HINT: Read about [ message ](https://edgeguides.rubyonrails.org/active_record_validations.html#message) in the  validation docs.
