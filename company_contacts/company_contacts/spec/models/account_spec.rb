@@ -15,4 +15,9 @@ RSpec.describe Account, type: :model do
     test = Account.create username: 'jduncan'
     expect(test.errors[:email]).to_not be_empty
   end
+
+  it 'username must contain at least 5 characters' do
+    test = Account.create username: 'jdun'
+    expect(test.errors[:username]).to_not be_empty
+  end
 end
