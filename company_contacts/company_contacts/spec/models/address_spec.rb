@@ -35,10 +35,47 @@ RSpec.describe Address, type: :model do
     test_address = new_user.addresses.create street_name: 'Coder Lane', street_number: 1, city: 'Atlanta', state: 'GA'
     expect(test_address.errors[:zip]).to_not be_empty
   end
+
+  it 'Street name is unique' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta', state: 'GA',
+                                             zip: 30_301, account_id: 1
+    test_address2 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+
+    expect(test_address3.errors[:street_name]).to_not be_empty
+  end
+
+  it 'Street number is unique' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta', state: 'GA',
+                                             zip: 30_301, account_id: 1
+    test_address2 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+
+    expect(test_address3.errors[:street_number]).to_not be_empty
+  end
+
+  it 'zip is unique' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    test_address = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta', state: 'GA',
+                                             zip: 30_301, account_id: 1
+    test_address2 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+    test_address3 = new_user.addresses.create street_name: 'Coder2', street_number: 1, city: 'Atlanta',
+                                              state: 'GA', zip: 30_301, account_id: 1
+
+    expect(test_address3.errors[:zip]).to_not be_empty
+  end
 end
 
-# As a developer, I need each Account password to have at least one number.
-# - HINT: Read about [ custom validations ](https://guides.rubyonrails.org/active_record_validations.html#performing-custom-validations) in the Active Record validation docs.
 # - As a developer, I want to validate that Address street_number, street_name, zip are unique for within an account.
 # - HINT: Read about [ :scope ](https://guides.rubyonrails.org/active_record_validations.html#uniqueness) in the Active Record validation docs.
 # - As a developer, I want to validate that the Address street_number and zip are numbers.
