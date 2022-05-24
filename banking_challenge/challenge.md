@@ -15,3 +15,10 @@
 ### Stretch Challenge
 - Add a credit limit to each card
 - Find the total credit extended to the owner with multiple credit cards
+
+```jeremy.credit_cards.sum(:credit_limit)```
+
+  ```
+  CreditCard Sum (0.5ms)  SELECT SUM("credit_cards"."credit_limit") FROM "credit_cards" WHERE "credit_cards"."owner_id" = $1  [["owner_id", 1]]
+=> 45000.0
+```
