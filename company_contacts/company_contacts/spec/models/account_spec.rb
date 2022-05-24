@@ -10,4 +10,9 @@ RSpec.describe Account, type: :model do
     test = Account.create username: 'jduncan', email: 'jeremy.duncan1984@gmail.com'
     expect(test.errors[:password]).to_not be_empty
   end
+
+  it 'is not valid without a email' do
+    test = Account.create username: 'jduncan'
+    expect(test.errors[:email]).to_not be_empty
+  end
 end
