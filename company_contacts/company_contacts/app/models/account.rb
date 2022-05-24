@@ -4,4 +4,6 @@ class Account < ApplicationRecord
   validates :username, length: { minimum: 5 }
   validates :username, :password, uniqueness: true
   validates :password, length: { minimum: 6 }
+
+  validates :password, format: { with: /\A(?=.*\d)/x, message: 'Must contain at least 1 number' }
 end

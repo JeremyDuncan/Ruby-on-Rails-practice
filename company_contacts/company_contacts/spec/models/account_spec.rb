@@ -37,4 +37,18 @@ RSpec.describe Account, type: :model do
     test2 = Account.create username: 'jduncan', password: 'PassWord1234', email: 'jeremy.duncan1984@gmail.com'
     expect(test2.errors[:password]).to_not be_empty
   end
+
+  it 'password must contain at least 1 number' do
+    test = Account.create username: 'jduncan', password: 'password', email: 'jeremy.duncan1984@gmail.com'
+    expect(test.errors[:password]).to_not be_empty
+  end
 end
+
+# As a developer, I need each Account password to have at least one number.
+# - HINT: Read about [ custom validations ](https://guides.rubyonrails.org/active_record_validations.html#performing-custom-validations) in the Active Record validation docs.
+# - As a developer, I want to validate that Address street_number, street_name, zip are unique for within an account.
+# - HINT: Read about [ :scope ](https://guides.rubyonrails.org/active_record_validations.html#uniqueness) in the Active Record validation docs.
+# - As a developer, I want to validate that the Address street_number and zip are numbers.
+# - HINT: Read about [ numericality ](https://edgeguides.rubyonrails.org/active_record_validations.html#numericality) in the Active Record validation docs.
+# - As a developer, I want to see a custom error message that says "Please, input numbers only" if street_number or zip code are not numbers.
+# - HINT: Read about [ message ](https://edgeguides.rubyonrails.org/active_record_validations.html#message) in the  validation docs.

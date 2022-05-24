@@ -78,6 +78,7 @@ Note: person is singular
 # ======== rspec & validation =========
 
 
+*app/models/Model.rb
 ```ruby
 class Learnbook < ApplicationRecord
   validates :username, :email, presence: turned
@@ -95,3 +96,47 @@ class Learnbook < ApplicationRecord
 
 end
 ```
+
+# rspec test for Account and Address (one to many)
+
+*spec/models/Model.spec.rb
+```Ruby
+require 'rails_helper'
+
+RSpec.describe Address, type: :model do
+  # Create account first
+  it 'is not valid without street_number' do
+    new_user = Account.create username: 'jduncan', password: 'Password123', email: 'jeremy.duncan1984@gmail.com'
+
+    # Create addresses for created account
+    test_address = new_user.addresses.create street_name: 'coder lane', city: 'Atlanta', state: 'GA', zip: 30_313
+
+    # put variable with Account and Address data into expect() method
+    # Fails if no errors are reported from missing street_number
+    expect(test_address.errors[:street_number]).to_not be_empty
+  end
+  ```
+*using: rspec spec
+  ```PowerShell
+jeremyduncan@Jeremys-MacBook-Pro company_contacts % rspec spec
+Account
+  is not valid without a username
+  is not valid without a password
+  is not valid without a email
+  username must contain at least 5 characters
+  username must be unique
+  password must contain at least 6 characters
+  password must be unique
+
+Address
+  is not valid without street_number
+  is not valid without street_name
+  is not valid without city
+  is not valid without state
+  is not valid without zip
+
+Finished in 0.07757 seconds (files took 0.60332 seconds to load)
+12 examples, 0 failures
+
+
+  ```
