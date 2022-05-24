@@ -7,6 +7,7 @@ cd app_name
 
 # create app database
 rails db:create
+  # rails db:drop removes database.
 
 # start Rails server
 rails server #http://localhost:3000 or 127.0.0.1:3000
