@@ -29,3 +29,14 @@
 - `rowan.update phone:"770-555-5555"` 
   - This does not require save
 
+# =========== Migrating Database =======================
+## useful commands
+- `rails generate migration action_name_here`
+- `rails db:migrate`
+- `add_column :table_name, :column_name, :datatype`
+- `change_column :table_name, :column_name, :datatype`
+- `rename_column :table, :old_column, :new_column`
+- `remove_column :table_name, :column_name`
+- Create a migration to add a new column to the database called movie_length
+- Update the values of the five existing attributes to include a movie_length value
+- Generate a migration to rename the column 'category' to 'genre'
